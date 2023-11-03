@@ -1,3 +1,11 @@
+AyaAccelerationSe:
+    Brief: "At the start of {PlayerName}'s turn, replenish 1 |Evasion| for each 4 |Acceleration|.\n|Acceleration| decreases |Barrier| gained from defending."
+    Description: "At the start of {OwnerName}'s turn, replenish 1 |Evasion| for each 4 |Acceleration|.\n|Acceleration| decreases |Barrier| gained from defending."
+    Name: Acceleration
+AyaArsenalBirdSe:
+    Brief: "At the start of {PlayerName}'s turn, add a random attack card and defense card to the hand. They |temporarily cost| {Mana} and have |Exile| and |Ethereal|."
+    Description: "At the start of {OwnerName}'s turn, add a random attack card and defense card to the hand. They |temporarily cost| {Mana} and have |Exile| and |Ethereal|."
+    Name: Arsenal Bird
 AyaBreakingNewsSe:
     Brief: "Enemies cannot act."
     Description: "Enemies cannot act for {Duration} turn{Duration:plural one='' other='s'}."
@@ -7,17 +15,21 @@ AyaBunbunmaruPrinterSe:
     Description: "Enemies cannot act for {Duration} turn{Duration:plural one='' other='s'}."
     Name: Bunbunmaru Printer
 AyaEvasionSe:
-    Brief: "{OwnerName} takes 0 damage from attacks. Prevents |Graze| from losing it.\nLose 1 |Evasion| when attacked and removed at the start of {OwnerName}'s next turn."
-    Description: "{OwnerName} takes 0 damage from the next {Level:plural one='attack' other='% attacks'}. Prevents |Graze| from losing it.\nLose 1 |Evasion| when attacked and removed at the start of {OwnerName}'s next turn."
+    Brief: "{OwnerName} takes 0 damage from attacks. Prevents |Graze| from losing it.\nLose 1 |Evasion| and |Acceleration| when attacked."
+    Description: "{OwnerName} takes 0 damage from the next {Level:plural one='attack' other='% attacks'}. Prevents |Graze| from losing it.\nLose 1 |Evasion| and |Acceleration| when attacked."
     Name: Evasion
 AyaPassiveSe:
-    Brief: "|Bunbunmaru Newspaper| deals 12 damage, all Status \"News\" cards has |Exile|, |Ethereal| and |Replenish|."
-    Description: "|Bunbunmaru Newspaper| deals 12 damage, all Status \"News\" cards has |Exile|, |Ethereal| and |Replenish|."
+    Brief: "All status \"News\" cards deals 10 more damage, has |Ethereal| and |Replenish|.\nStatus cards witout |Unplayable| can be upgraded, reducing their cost by half."
+    Description: "All status \"News\" cards deals 10 more damage, has |Ethereal| and |Replenish|.\nStatus cards witout |Unplayable| can be upgraded, reducing their cost by half."
     Name: Reporter
 AyaPerfectEvasionSe:
     Brief: "{OwnerName} takes 0 damage from |Accurate| attacks. Prevents |Evasion| and/or |Graze| from losing it.\nLose 1 |Perfect Evasion| when accurately attacked or at the start of each turn."
     Description: "{OwnerName} takes 0 damage from the next {Level:plural one='accurate attack' other='% accurate attacks'}. Prevents |Evasion| and/or |Graze| from losing it.\nLose 1 |Perfect Evasion| when accurately attacked or when turn starts."
     Name: Perfect Evasion
+AyaTerukuniShiningThroughHeavenandEarthSe:
+    Brief: "All cards played twice.\nLose 1 maximum life for each card played."
+    Description: "All cards played twice.\nLose 1 maximum life for each card played."
+    Name: Terukuni Shining Through Heaven and Earth
 DayuuAbilitySe:
     Brief: "At the start of {PlayerName}'s turn, gain random mana for each |Teammate| cards in the hand.\nFor each |Dayuu, Sparrow of Sobs and Skulls| in the hand, gain more random mana instead."
     Description: "At the start of {OwnerName}'s turn, gain {Count} random mana for each |Teammate| cards in the hand.\nFor each |Dayuu, Sparrow of Sobs and Skulls| in the hand, gain {Level} random mana instead."
@@ -30,6 +42,10 @@ DayuuExodiaSe:
     Brief: "{PlayerName} can't lose life."
     Description: "{OwnerName} can't lose life."
     Name: Advent
+HexagonSe:
+    Brief: "Accumulate damage every 10 seconds. When {PlayerName} plays a card, deal that much damage and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage."
+    Description: "Accumulate {AccumulateDamage} damage every 10 seconds. When {PlayerName} plays a card, deal {Level} damage to her and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage.\n{OwnerName} loses 30 life for each second."
+    Name: Survival
 StSAccuracySe:
     Brief: "Damage of |Throwing Knives| are increased."
     Description: "|Throwing Knives| deal {Level} more damage."
@@ -66,6 +82,10 @@ StSPanicButtonSe:
     Brief: "Can't gain |Block| or |Barrier| from cards."
     Description: "{OwnerName} can't gain |Block| or |Barrier| from cards for {Duration} turn{Duration:plural one='' other='s'}."
     Name: Panic Button
+StSTerrorSe:
+    Brief: "|Vulnerable| can't be removed from {OwnerName}."
+    Description: "|Vulnerable| can't be removed from {OwnerName}."
+    Name: Terror
 StSTheBombSe:
     Brief: "When removed, deal damage to each enemy."
     Description: "When removed, deal {Count} damage to each enemy."

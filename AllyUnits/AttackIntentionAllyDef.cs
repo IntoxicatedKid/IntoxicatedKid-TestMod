@@ -1,8 +1,9 @@
-﻿using System;
+﻿/*using System;
 using JetBrains.Annotations;
+using LBoL.Core;
 using LBoL.Core.Units;
 
-namespace LBoL.Core.Intentions
+namespace test.AllyUnits
 {
     // Token: 0x020000E9 RID: 233
     [UsedImplicitly]
@@ -24,7 +25,7 @@ namespace LBoL.Core.Intentions
         {
             get
             {
-                return this.LocalizeProperty("MultiDamageDescription", true, true);
+                return LocalizeProperty("MultiDamageDescription", true, true);
             }
         }
 
@@ -34,7 +35,7 @@ namespace LBoL.Core.Intentions
         {
             get
             {
-                return this.LocalizeProperty("AccurateDescription", true, true);
+                return LocalizeProperty("AccurateDescription", true, true);
             }
         }
 
@@ -44,7 +45,7 @@ namespace LBoL.Core.Intentions
         {
             get
             {
-                return this.LocalizeProperty("AccurateMultiDamageDescription", true, true);
+                return LocalizeProperty("AccurateMultiDamageDescription", true, true);
             }
         }
 
@@ -69,38 +70,38 @@ namespace LBoL.Core.Intentions
         {
             get
             {
-                int? times = this.Times;
+                int? times = Times;
                 int num = 1;
-                if (!((times.GetValueOrDefault() > num) & (times != null)))
+                if (!(times.GetValueOrDefault() > num & times != null))
                 {
-                    return CalculateDamage(this.Damage).ToString();
+                    return CalculateDamage(Damage).ToString();
                 }
-                return CalculateDamage(this.Damage).ToString() + "x" + this.Times.ToString();
+                return CalculateDamage(Damage).ToString() + "x" + Times.ToString();
             }
         }
 
         // Token: 0x060008DC RID: 2268 RVA: 0x00019740 File Offset: 0x00017940
         protected override string GetBaseDescription()
         {
-            if (!this.IsAccuracy)
+            if (!IsAccuracy)
             {
-                int? num = this.Times;
+                int? num = Times;
                 int num2 = 1;
-                if (!((num.GetValueOrDefault() > num2) & (num != null)))
+                if (!(num.GetValueOrDefault() > num2 & num != null))
                 {
                     return BaseDescription;
                 }
-                return this.MultiDamageDescription;
+                return MultiDamageDescription;
             }
             else
             {
-                int? num = this.Times;
+                int? num = Times;
                 int num2 = 1;
-                if (!((num.GetValueOrDefault() > num2) & (num != null)))
+                if (!(num.GetValueOrDefault() > num2 & num != null))
                 {
-                    return this.AccurateDescription;
+                    return AccurateDescription;
                 }
-                return this.AccurateMultiDamageDescription;
+                return AccurateMultiDamageDescription;
             }
         }
 
@@ -110,3 +111,4 @@ namespace LBoL.Core.Intentions
         }
     }
 }
+*/

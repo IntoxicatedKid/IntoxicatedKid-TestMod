@@ -64,31 +64,29 @@ namespace test.PlayerUnits
         }
         public override PlayerUnitConfig MakeConfig()
         {
-            var reimuConfig = PlayerUnitConfig.FromId("Reimu").Copy();
-
-            var config = new PlayerUnitConfig(
+            var playerUnitConfig = new PlayerUnitConfig(
             Id: "",
             ShowOrder: 6,
             Order: 0,
             UnlockLevel: 0,
             ModleName: "",
-            NarrativeColor: "#e58c27",
+            NarrativeColor: "#ab9561",
             IsSelectable: true,
             MaxHp: 65,
             InitialMana: new ManaGroup() { Red = 2, Green = 2 },
             InitialMoney: 65,
             InitialPower: 0,
             //temp
-            UltimateSkillA: reimuConfig.UltimateSkillA,
-            UltimateSkillB: reimuConfig.UltimateSkillB,
-            ExhibitA: reimuConfig.ExhibitA,
-            ExhibitB: reimuConfig.ExhibitB,
-            DeckA: reimuConfig.DeckA,
-            DeckB: reimuConfig.DeckB,
-            DifficultyA: 2,
+            UltimateSkillA: "AyaUltG",
+            UltimateSkillB: "AyaUltG",
+            ExhibitA: "AyaR",
+            ExhibitB: "AyaG",
+            DeckA: new string[] { "Shoot", "Shoot", "Boundary", "Boundary", "AyaAttackR", "AyaAttackR", "AyaBlockG", "AyaBlockG", "AyaWindWalk" },
+            DeckB: new string[] { "Shoot", "Shoot", "Boundary", "Boundary", "AyaAttackG", "AyaAttackG", "AyaBlockR", "AyaBlockR", "AyaTakePicture" },
+            DifficultyA: 1,
             DifficultyB: 3
             );
-            return config;
+            return playerUnitConfig;
         }
 
 
@@ -97,7 +95,7 @@ namespace test.PlayerUnits
         {
             protected override void OnEnterBattle(BattleController battle)
             {
-                ReactBattleEvent(Battle.BattleStarted, new Func<GameEventArgs, IEnumerable<BattleAction>>(this.OnBattleStarted));
+                ReactBattleEvent(Battle.BattleStarted, new Func<GameEventArgs, IEnumerable<BattleAction>>(OnBattleStarted));
             }
             private IEnumerable<BattleAction> OnBattleStarted(GameEventArgs arg)
             {
@@ -128,6 +126,55 @@ namespace test.PlayerUnits
             var config = UnitModelConfig.FromName("Aya").Copy();
             config.Flip = false;
             return config;
+        }
+    }
+    public sealed class AyaUltGDef : UltimateSkillTemplate
+    {
+        public override IdContainer GetId() => nameof(AyaUltG);
+
+        public override LocalizationOption LoadLocalization()
+        {
+            var gl = new GlobalLocalization(embeddedSource);
+            gl.LocalizationFiles.AddLocaleFile(Locale.En, "UltimateSkillsEn");
+            return gl;
+        }
+
+        public override Sprite LoadSprite()
+        {
+            return ResourceLoader.LoadSprite("AyaUltG.png", embeddedSource);
+        }
+
+        public override UltimateSkillConfig MakeConfig()
+        {
+            var config = new UltimateSkillConfig(
+                Id: "",
+                Order: 10,
+                PowerCost: 100,
+                PowerPerLevel: 100,
+                MaxPowerLevel: 2,
+                RepeatableType: UsRepeatableType.OncePerTurn,
+                Damage: 30,
+                Value1: 0,
+                Value2: 0,
+                Keywords: Keyword.Accuracy,
+                RelativeEffects: new List<string>() { },
+                RelativeCards: new List<string>() { }
+                );
+            return config;
+        }
+    }
+
+    [EntityLogic(typeof(AyaUltGDef))]
+    public sealed class AyaUltG : UltimateSkill
+    {
+        public AyaUltG()
+        {
+            TargetType = TargetType.SingleEnemy;
+            GunName = "EAyaSpell1";
+        }
+        protected override IEnumerable<BattleAction> Actions(UnitSelector selector)
+        {
+            yield return new DamageAction(Owner, selector.GetEnemy(Battle), Damage, GunName, GunType.Single);
         }
     }
 }

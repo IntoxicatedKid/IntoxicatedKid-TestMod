@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using LBoL.Base;
+using LBoL.ConfigData;
 using UnityEngine;
 
-namespace LBoL.ConfigData
+namespace test.AllyUnits
 {
     // Token: 0x02000008 RID: 8
     public sealed class AllyGroupConfig
@@ -79,7 +80,7 @@ namespace LBoL.ConfigData
         public static IReadOnlyList<AllyGroupConfig> AllConfig()
         {
             ConfigDataManager.Initialize();
-            return Array.AsReadOnly<AllyGroupConfig>(_data);
+            return Array.AsReadOnly(_data);
         }
 
         // Token: 0x060000E5 RID: 229 RVA: 0x00004738 File Offset: 0x00002938
@@ -87,7 +88,7 @@ namespace LBoL.ConfigData
         {
             ConfigDataManager.Initialize();
             AllyGroupConfig AllyGroupConfig;
-            return (!_IdTable.TryGetValue(Id, out AllyGroupConfig)) ? null : AllyGroupConfig;
+            return !_IdTable.TryGetValue(Id, out AllyGroupConfig) ? null : AllyGroupConfig;
         }
 
         // Token: 0x060000E6 RID: 230 RVA: 0x00004764 File Offset: 0x00002964
@@ -95,25 +96,25 @@ namespace LBoL.ConfigData
         {
             string[] array = new string[21];
             array[0] = "{AllyGroupConfig Id=";
-            array[1] = ConfigDataManager.System_String.ToString(this.Id);
+            array[1] = ConfigDataManager.System_String.ToString(Id);
             array[2] = ", Name=";
-            array[3] = ConfigDataManager.System_String.ToString(this.Name);
+            array[3] = ConfigDataManager.System_String.ToString(Name);
             array[4] = ", FormationName=";
-            array[5] = ConfigDataManager.System_String.ToString(this.FormationName);
+            array[5] = ConfigDataManager.System_String.ToString(FormationName);
             array[6] = ", Enemies=[";
-            array[7] = string.Join(", ", this.Enemies.Select((string v1) => ConfigDataManager.System_String.ToString(v1)));
+            array[7] = string.Join(", ", Enemies.Select((v1) => ConfigDataManager.System_String.ToString(v1)));
             array[8] = "], EnemyType=";
-            array[9] = this.EnemyType.ToString();
+            array[9] = EnemyType.ToString();
             array[10] = ", DebutTime=";
-            array[11] = ConfigDataManager.System_Single.ToString(this.DebutTime);
+            array[11] = ConfigDataManager.System_Single.ToString(DebutTime);
             array[12] = ", RollBossExhibit=";
-            array[13] = ConfigDataManager.System_Boolean.ToString(this.RollBossExhibit);
+            array[13] = ConfigDataManager.System_Boolean.ToString(RollBossExhibit);
             array[14] = ", PlayerRoot=";
-            array[15] = ConfigDataManager.UnityEngine_Vector2.ToString(this.PlayerRoot);
+            array[15] = ConfigDataManager.UnityEngine_Vector2.ToString(PlayerRoot);
             array[16] = ", PreBattleDialogName=";
-            array[17] = ConfigDataManager.System_String.ToString(this.PreBattleDialogName);
+            array[17] = ConfigDataManager.System_String.ToString(PreBattleDialogName);
             array[18] = ", PostBattleDialogName=";
-            array[19] = ConfigDataManager.System_String.ToString(this.PostBattleDialogName);
+            array[19] = ConfigDataManager.System_String.ToString(PostBattleDialogName);
             array[20] = "}";
             return string.Concat(array);
         }
@@ -126,10 +127,10 @@ namespace LBoL.ConfigData
                 AllyGroupConfig[] array = new AllyGroupConfig[binaryReader.ReadInt32()];
                 for (int i = 0; i < array.Length; i++)
                 {
-                    array[i] = new AllyGroupConfig(ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.ReadList<string>(binaryReader, (BinaryReader r1) => ConfigDataManager.System_String.ReadFrom(r1)), (EnemyType)binaryReader.ReadInt32(), ConfigDataManager.System_Single.ReadFrom(binaryReader), ConfigDataManager.System_Boolean.ReadFrom(binaryReader), ConfigDataManager.UnityEngine_Vector2.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader));
+                    array[i] = new AllyGroupConfig(ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.ReadList(binaryReader, (r1) => ConfigDataManager.System_String.ReadFrom(r1)), (EnemyType)binaryReader.ReadInt32(), ConfigDataManager.System_Single.ReadFrom(binaryReader), ConfigDataManager.System_Boolean.ReadFrom(binaryReader), ConfigDataManager.UnityEngine_Vector2.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader), ConfigDataManager.System_String.ReadFrom(binaryReader));
                 }
                 _data = array;
-                _IdTable = _data.ToDictionary((AllyGroupConfig elem) => elem.Id);
+                _IdTable = _data.ToDictionary((elem) => elem.Id);
             }
         }
 
@@ -165,6 +166,6 @@ namespace LBoL.ConfigData
         private static AllyGroupConfig[] _data = Array.Empty<AllyGroupConfig>();
 
         // Token: 0x0400006F RID: 111
-        private static Dictionary<string, AllyGroupConfig> _IdTable = _data.ToDictionary((AllyGroupConfig elem) => elem.Id);
+        private static Dictionary<string, AllyGroupConfig> _IdTable = _data.ToDictionary((elem) => elem.Id);
     }
 }

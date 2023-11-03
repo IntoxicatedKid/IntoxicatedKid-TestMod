@@ -75,7 +75,7 @@ namespace test.StatusEffects
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { "AyaEvasionSe", "Graze" },
                 VFX: "Graze",
-                VFXloop: "GrazeLoop",
+                VFXloop: "Default",
                 SFX: "Graze"
             );
             return statusEffectConfig;
@@ -221,6 +221,13 @@ namespace test.StatusEffects
                     return;
                 }
                 React(new RemoveStatusEffectAction(this, true));
+            }
+            public override string UnitEffectName
+            {
+                get
+                {
+                    return "GrazeLoop";
+                }
             }
         }
     }

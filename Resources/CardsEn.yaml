@@ -1,3 +1,12 @@
+AyaArmoredRaven:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Armored Raven
+AyaArsenalBird:
+  Description: "Lose all |Acceleration|. Gain {Shield} |Barrier|.\nAt the start of {PlayerName}'s turn, add a random Common attack card and defense card to the hand. They |temporarily cost| {Mana} and have |Exile| and |Ethereal|.\nThis effect does not stack."
+  UpgradedDescription: "Lose all |Acceleration|. Gain {Shield} |Barrier|.\nAt the start of {PlayerName}'s turn, add a random Common or Uncommon attack card and defense card to the hand. They |temporarily cost| {Mana} and have |Exile| and |Ethereal|.\nThis effect does not stack."
+  Name: Arsenal Bird
+  DetailText: "These |e:alternate cards| ignore maximum hand size."
 AyaAttackR:
   Description: "Deal {Damage} damage."
   UpgradedDescription: "Deal {Damage} damage."
@@ -22,6 +31,14 @@ AyaBunbunmaruPrinter:
   Description: "At the start of {PlayerName}'s turn, add |{Value1:plural one='% Bunbunmaru Newspaper' other='% Bunbunmaru Newspapers'}| to the hand."
   UpgradedDescription: "Add |{Value1:plural one='% Bunbunmaru Newspaper' other='% Bunbunmaru Newspapers'}| to the hand.\nAt the start of {PlayerName}'s turn, add |{Value1:plural one='% Bunbunmaru Newspaper' other='% Bunbunmaru Newspapers'}| to the hand."
   Name: Bunbunmaru Printer
+AyaComicallyLargeHat:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Comically Large Hat
+AyaCreativeThinking:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Creative Thinking
 AyaFastestGun:
   Description: "Deal {Damage} damage.\n|When drawn|: If {SelfName} is played in less than {Value1:plural one='% second' other='% seconds'}, apply {Value2} |Lock On| and remove |Apex Speedster| from the target."
   UpgradedDescription: "Deal {Damage} damage.\n|When drawn|: If {SelfName} is played in less than {Value1:plural one='% second' other='% seconds'}, apply {Value2} |Lock On| and remove |Apex Speedster| from the target."
@@ -30,10 +47,65 @@ AyaFma:
   Description: "Gain {Value1} |Firepower|.\nFor each 4 |Acceleration| {PlayerName} has, increase {SelfName}'s |Firepower| by 1.\n|At the start of combat|: {SelfName} |costs| <sprite=\"ManaSprite\" name=\"0\"> for {Value2:plural one='% second' other='% seconds'}."
   UpgradedDescription: "Gain {Value1} |Firepower|.\nFor each 4 |Acceleration| {PlayerName} has, increase {SelfName}'s |Firepower| by 1.\n|At the start of combat|: {SelfName} |costs| <sprite=\"ManaSprite\" name=\"0\"> for {Value2:plural one='% second' other='% seconds'}."
   Name: F = ma
+AyaFormofSalvation:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Form of Salvation
+AyaMemoryinPicture:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Memory in Picture
+AyaNewsBig:
+  NonbattleDescription: "Deal {Damage} damage. Then, deal half that much damage to\
+    \ each other enemy."
+  UpgradedNonbattleDescription: "Deal {Damage} damage. Then, deal half that much damage to\
+    \ each other enemy."
+  Description: "Deal {Damage} damage. Then, deal {HalfDamage} damage to each other\
+    \ enemy."
+  UpgradedDescription: "Deal {Damage} damage. Then, deal {HalfDamage} damage to each other\
+    \ enemy."
+  Name: Big Bunbunmaru Newspaper
+AyaNobility:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Nobility
+AyaPanorama:
+  Description: "Deal {Damage} damage. Apply |Filmed: Panorama|.\n|When played|: {SelfName} gains |Temporary Retain| and |Unplayable|, remain in the hand.\nAt the start of {PlayerName}'s turn, {SelfName} loses |Unplayable|.\nIf all enemies have |Filmed: Panorama|, all enemies lose {Value1} life for each enemy. If 3 or more enemies have |Filmed: Panorama|, Add a |Big Bunbunmaru Newspaper| to the draw pile. Then, remove |Filmed: Panorama| from each enemy and discard {SelfName}."
+  UpgradedDescription: "Deal {Damage} damage. Apply |Filmed: Panorama|.\n|When played|: {SelfName} gains |Temporary Retain| and |Unplayable|, remain in the hand.\nAt the start of {PlayerName}'s turn, {SelfName} loses |Unplayable|.\nIf all enemies have |Filmed: Panorama|, all enemies lose {Value1} life for each enemy. If 3 or more enemies have |Filmed: Panorama|, Add a |Big Bunbunmaru Newspaper| to the draw pile. Then, remove |Filmed: Panorama| from each enemy and discard {SelfName}."
+  Name: Panorama
 AyaPerfectEvasion:
   Description: "Gain {Value1} |Perfect Evasion|."
   UpgradedDescription: "Gain {Value1} |Perfect Evasion|."
   Name: Authority of Evasion
+AyaRuinBird:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Ruin Bird
+AyaReignofWind:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Reign of Wind
+AyaSuspiciousIntention:
+  Description: ""
+  UpgradedDescription: ""
+  Name: Suspicious Intention
+AyaTakePicture:
+  Description: "Deal {Damage} damage.\nAdd {Value1} |Bunbunmaru Newspaper| to the draw pile."
+  UpgradedDescription: "Deal {Damage} damage.\nAdd {Value1} |Bunbunmaru Newspaper| to the draw pile."
+  Name: Take Picture
+AyaTerukuniShiningThroughHeavenandEarth:
+  Description: "Whenever {PlayerName} plays a card, played twice and lose {Value1} maximum life.\nEnd the turn. Then, take an extra turn.\n|p:{SelfName} can only played once per run.|\n|Limited\u3010{Value2}\u3011|"
+  UpgradedDescription: "Whenever {PlayerName} plays a card, played twice and lose {Value1} maximum life.\nEnd the turn. Then, take an extra turn.\n|p:{SelfName} can only played once per run.|\n|Limited\u3010{Value2}\u3011|"
+  Name: Terukuni Shining Through Heaven and Earth
+  DetailText: "{SelfName} cannot be produced by other cards."
+AyaWhatRemains:
+  Description: ""
+  UpgradedDescription: ""
+  Name: What Remains
+AyaWindWalk:
+  Description: "Deal {Damage} damage.\nGain {Value1} |Acceleration|."
+  UpgradedDescription: "Deal {Damage} damage.\nGain {Value1} |Acceleration|."
+  Name: Wind Walk
 CirnoSpellingTest:
   Description: "Enter an illustrator's name of randomly chosen card. If correct, it |costs| {Mana}.\nAdd that card to the hand."
   UpgradedDescription: "Enter an illustrator's name of randomly chosen card. If correct, it |costs| {Mana}.\nAdd that card to the hand."
@@ -54,8 +126,8 @@ DayuuSkill:
   Name: Youkai Symposium
   FlavorText: ":beers:"
 DayuuAbility:
-  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana.\nIncrease by {Value2} for each |Remnanat| card in the hand."
-  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana.\nIncrease by {Value2} for each |Remnanat| card in the hand."
+  Description: "At the start of {PlayerName}'s turn, gain {Value1} random mana.\nIncrease by {Value2} for each |Remnanat| card or |Teammate| card in the hand."
+  UpgradedDescription: "At the start of {PlayerName}'s turn, gain {Value1} random mana.\nIncrease by {Value2} for each |Remnanat| card or |Teammate| card in the hand."
   Name: Color the World
   FlavorText: ":handshake:"
 DayuuFriend:
@@ -89,6 +161,34 @@ DayuuReale:
   Name: Reale, Scary Stalker of Discord
   FlavorText: ":skull:"
   DetailText: "These |e:alternate cards| ignore total mana, mana color and mana of any color can be spent to pay their mana costs."
+DayuuReimuCirno:
+  Description: "TBD"
+  UpgradedDescription: "TBD"
+  Name: Binary Star
+  //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Cirno's starting Exhibit."
+DayuuReimuKoishi:
+  Description: "{FriendP}                 |p:??????|                 "
+  UpgradedDescription: "{FriendP}                 |p:??????|                 "
+  ExtraDescription1: "{FriendA}                 |p:??????|                 "
+  UpgradedExtraDescription1: "{FriendA}                 |p:??????|                 "
+  ExtraDescription2: "{FriendU}                 |p:??????|                 "
+  UpgradedExtraDescription2: "{FriendU}                 |p:??????|                 "
+  Name: "??????"
+DayuuReimuMarisa:
+  Description: "Deal {Damage} damage to each enemy {Value2} times."
+  UpgradedDescription: "Apply {Value1} |Vulnerable| to each enemy.\nDeal {Damage} damage to each enemy {Value2} times."
+  Name: Fantasy Spark
+  //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Marisa's starting Exhibit."
+DayuuReimuReimu:
+  Description: "TBD"
+  UpgradedDescription: "TBD"
+  Name: Forgotten Portrait
+  //DetailText: "{SelfName} can only be acquired by Reimu."
+DayuuReimuSakuya:
+  Description: "TBD"
+  UpgradedDescription: "TBD"
+  Name: Delicacy
+  //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Sakuya's starting Exhibit."
 NitoriBlueprint:
   Description: "Show all |Blueprints| you currently have."
   Name: Blueprint
@@ -143,6 +243,10 @@ StSBlind:
   Description: Apply {Value1} |Weak|.
   UpgradedDescription: Apply {Value1} |Weak| to each enemy.
   Name: Blind
+StSBludgeon:
+  Description: "Deal {Damage} damage.\n{SelfName} is not affected by |Weak|."
+  UpgradedDescription: "Deal {Damage} damage.\n{SelfName} is not affected by |Weak|."
+  Name: Bludgeon
 StSBurst:
   Description: "The next {Value1} defense or skill {Value1:plural one='card' other='cards'} played twice."
   UpgradedDescription: "The next {Value1} defense or skill {Value1:plural one='card' other='cards'} played twice."
@@ -167,6 +271,10 @@ StSDramaticEntrance:
   Description: "Deal {Damage} damage to each enemy."
   UpgradedDescription: "Deal {Damage} damage to each enemy.\n|At the start of combat|: |Exile| {SelfName}, deal {Damage} damage to each enemy."
   Name: Dramatic Entrance
+StSDropKick:
+  Description: "Deal {Damage} damage.\nIf the target has |Vulnerable|, gain {Mana} and draw {Value1:plural one='% card' other='% cards'}."
+  UpgradedDescription: "Deal {Damage} damage.\nIf the target has |Vulnerable|, gain {Mana} and draw {Value1:plural one='% card' other='% cards'}."
+  Name: DropKick
 StSDoubleTap:
   Description: "The next {Value1} attack {Value1:plural one='card' other='cards'} played twice."
   UpgradedDescription: "The next {Value1} attack {Value1:plural one='card' other='cards'} played twice."
@@ -203,6 +311,10 @@ StSGoodInstincts:
   Description: Gain {Block} |Block|.
   UpgradedDescription: Gain {Block} |Block|.
   Name: Good Instincts
+StSHeelHook:
+  Description: "Deal {Damage} damage.\nIf the target has |Weak|, gain {Mana} and draw {Value1:plural one='% card' other='% cards'}."
+  UpgradedDescription: "Deal {Damage} damage.\nIf the target has |Weak|, gain {Mana} and draw {Value1:plural one='% card' other='% cards'}."
+  Name: Heel Hook
 StSImpatience:
   Description: "If there are no attack cards in hand, draw {Value1:plural one='% card' other='% cards'}."
   UpgradedDescription: "If there are no attack cards in hand, draw {Value1:plural one='% card' other='% cards'}."
@@ -240,6 +352,10 @@ StSMindBlast:
 StSNecronomicurse:
   Description: "|When Exiled|: Return {SelfName} from the exile pile to the hand."
   Name: Necronomicurse
+StSOutmaneuver:
+  Description: "Gain {Mana} at the start of the next turn."
+  UpgradedDescription: "Gain {Mana} at the start of the next turn."
+  Name: Outmaneuver
 StSOverclock:
   Description: "Draw cards until the hand is full.\nAdd a |Refracted Sunlight| to the discard pile for each {Value1:plural one='% card' other='% cards'} drawn this way."
   UpgradedDescription: "Draw cards until the hand is full.\nAdd a |Refracted Sunlight| to the discard pile for each {Value1:plural one='% card' other='% cards'} drawn this way."
@@ -284,6 +400,10 @@ StSTheBomb:
   Description: "At the end of {PlayerName}'s third turn, deal {Value1} damage to each enemy."
   UpgradedDescription: "At the end of {PlayerName}'s third turn, deal {Value1} damage to each enemy."
   Name: The Bomb
+StSTerror:
+  Description: "Apply {Value1} |Vulnerable|.\nThis |Vulnerable| can't be removed from that enemy."
+  UpgradedDescription: "Apply {Value1} |Vulnerable|.\nThis |Vulnerable| can't be removed from that enemy."
+  Name: Terror
 StSTrip:
   Description: Apply {Value1} |Vulnerable|.
   UpgradedDescription: Apply {Value1} |Vulnerable| to each enemy.

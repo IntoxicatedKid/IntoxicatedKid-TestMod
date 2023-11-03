@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using LBoL.Base;
-using LBoL.ConfigData;
-using test.AllyUnits;
+using LBoL.Core;
 using UnityEngine;
 
-namespace LBoL.Core.Units
+namespace test.AllyUnits
 {
     // Token: 0x02000074 RID: 116
     public class AllyGroupEntry : IEnumerable<AllyGroupEntry.EntrySource>, IEnumerable
@@ -22,7 +21,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.Id;
+                return Config.Id;
             }
         }
 
@@ -32,7 +31,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.EnemyType;
+                return Config.EnemyType;
             }
         }
 
@@ -42,7 +41,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.RollBossExhibit;
+                return Config.RollBossExhibit;
             }
         }
 
@@ -52,7 +51,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.FormationName;
+                return Config.FormationName;
             }
         }
 
@@ -62,7 +61,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.PlayerRoot;
+                return Config.PlayerRoot;
             }
         }
 
@@ -72,7 +71,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.PreBattleDialogName;
+                return Config.PreBattleDialogName;
             }
         }
 
@@ -82,7 +81,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.PostBattleDialogName;
+                return Config.PostBattleDialogName;
             }
         }
 
@@ -92,32 +91,32 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this.Config.DebutTime;
+                return Config.DebutTime;
             }
         }
 
         // Token: 0x06000563 RID: 1379 RVA: 0x0001109C File Offset: 0x0000F29C
         public AllyGroupEntry(AllyGroupConfig config)
         {
-            this.Config = config;
+            Config = config;
         }
 
         // Token: 0x06000564 RID: 1380 RVA: 0x000110B6 File Offset: 0x0000F2B6
         public void Add(Type type)
         {
-            this._entries.Add(new AllyGroupEntry.EntrySource(type, this._entries.Count));
+            _entries.Add(new EntrySource(type, _entries.Count));
         }
 
         // Token: 0x06000565 RID: 1381 RVA: 0x000110D4 File Offset: 0x0000F2D4
         public void Add(Type type, int rootIndex)
         {
-            this._entries.Add(new AllyGroupEntry.EntrySource(type, rootIndex));
+            _entries.Add(new EntrySource(type, rootIndex));
         }
 
         // Token: 0x06000566 RID: 1382 RVA: 0x000110E8 File Offset: 0x0000F2E8
         internal AllyGroup Generate(GameRunController gameRun)
         {
-            AllyGroup AllyGroup = new AllyGroup(this.Id, this._entries, this.EnemyType, this.FormationName, this.PlayerRootV2, this.PreBattleDialogName, this.PostBattleDialogName, this.DebutTime);
+            AllyGroup AllyGroup = new AllyGroup(Id, _entries, EnemyType, FormationName, PlayerRootV2, PreBattleDialogName, PostBattleDialogName, DebutTime);
             foreach (AllyUnit enemyUnit in AllyGroup)
             {
                 enemyUnit.EnterGameRun(gameRun);
@@ -126,41 +125,41 @@ namespace LBoL.Core.Units
         }
 
         // Token: 0x06000567 RID: 1383 RVA: 0x00011168 File Offset: 0x0000F368
-        public IEnumerator<AllyGroupEntry.EntrySource> GetEnumerator()
+        public IEnumerator<EntrySource> GetEnumerator()
         {
-            return this._entries.GetEnumerator();
+            return _entries.GetEnumerator();
         }
 
         // Token: 0x06000568 RID: 1384 RVA: 0x0001117A File Offset: 0x0000F37A
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         // Token: 0x06000569 RID: 1385 RVA: 0x00011184 File Offset: 0x0000F384
-        public List<AllyGroupEntry.EntrySource> ToList()
+        public List<EntrySource> ToList()
         {
-            if (this._list != null)
+            if (_list != null)
             {
-                return this._list;
+                return _list;
             }
-            this._list = Enumerable.Repeat<AllyGroupEntry.EntrySource>(null, 5).ToList<AllyGroupEntry.EntrySource>();
-            foreach (AllyGroupEntry.EntrySource entrySource in this._entries)
+            _list = Enumerable.Repeat<EntrySource>(null, 5).ToList();
+            foreach (EntrySource entrySource in _entries)
             {
-                if (this._list[entrySource.RootIndex] != null)
+                if (_list[entrySource.RootIndex] != null)
                 {
-                    throw new InvalidOperationException("'" + this.Id + "' has duplicated root index");
+                    throw new InvalidOperationException("'" + Id + "' has duplicated root index");
                 }
-                this._list[entrySource.RootIndex] = entrySource;
+                _list[entrySource.RootIndex] = entrySource;
             }
-            return this._list;
+            return _list;
         }
 
         // Token: 0x040002A5 RID: 677
-        private readonly List<AllyGroupEntry.EntrySource> _entries = new List<AllyGroupEntry.EntrySource>();
+        private readonly List<EntrySource> _entries = new List<EntrySource>();
 
         // Token: 0x040002A6 RID: 678
-        private List<AllyGroupEntry.EntrySource> _list;
+        private List<EntrySource> _list;
 
         // Token: 0x020001FE RID: 510
         public class EntrySource
@@ -176,8 +175,8 @@ namespace LBoL.Core.Units
             // Token: 0x06000FE8 RID: 4072 RVA: 0x0002A85B File Offset: 0x00028A5B
             public EntrySource(Type type, int rootIndex)
             {
-                this.Type = type;
-                this.RootIndex = rootIndex;
+                Type = type;
+                RootIndex = rootIndex;
             }
         }
     }

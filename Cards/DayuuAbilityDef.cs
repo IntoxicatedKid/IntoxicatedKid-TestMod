@@ -183,7 +183,7 @@ namespace test.Cards
                 if (!Battle.BattleShouldEnd)
                 {
                     NotifyActivating();
-                    List<Card> list = Battle.HandZone.Where((card) => card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend || card is DayuuFriend2).ToList();
+                    List<Card> list = Battle.HandZone.Where((card) => card is DayuuAttack || card is DayuuDefense || card is DayuuSkill || card is DayuuAbility || card is DayuuFriend || card is DayuuFriend2 || card.CardType == CardType.Friend).ToList();
                     ManaGroup manaGroup = ManaGroup.Empty;
                     for (int i = 0; i < Count; i++)
                     {

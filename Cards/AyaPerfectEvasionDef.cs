@@ -115,7 +115,7 @@ namespace test.Cards
                 UpgradedRelativeCards: new List<string>() { },
                 Owner: "AyaPlayerUnit",
                 Unfinished: false,
-                Illustrator: "",
+                Illustrator: "Hyuuga Azuri",
                 SubIllustrator: new List<string>() { }
             );
 

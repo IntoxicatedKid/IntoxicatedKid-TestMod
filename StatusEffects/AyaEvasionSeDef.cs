@@ -51,7 +51,7 @@ namespace test.StatusEffects
 
         public override Sprite LoadSprite()
         {
-            return ResourceLoader.LoadSprite("Resources.StSAccuracySe.png", embeddedSource);
+            return ResourceLoader.LoadSprite("Resources.AyaEvasionSe.png", embeddedSource);
         }
         public override StatusEffectConfig MakeConfig()
         {
@@ -74,7 +74,7 @@ namespace test.StatusEffects
                 Keywords: Keyword.None,
                 RelativeEffects: new List<string>() { "Graze" },
                 VFX: "Graze",
-                VFXloop: "GrazeLoop",
+                VFXloop: "Default",
                 SFX: "Graze"
             );
             return statusEffectConfig;
@@ -145,19 +145,14 @@ namespace test.StatusEffects
             }
             private void OnOwnerTurnStarted(UnitEventArgs args)
             {
-                if (Owner.HasStatusEffect<WindGirl>())
+                if (Owner.HasStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>())
                 {
                     return;
                 }
                 if (IsAutoDecreasing)
                 {
-                    int num = Level - 1;
-                    Level = num;
-                    if (Level == 0)
-                    {
-                        React(new RemoveStatusEffectAction(this, true));
-                        return;
-                    }
+                    React(new RemoveStatusEffectAction(this, true));
+                    return;
                 }
                 else
                 {
@@ -168,6 +163,14 @@ namespace test.StatusEffects
             {
                 int num = Level - 1;
                 Level = num;
+                if (Owner.HasStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>())
+                {
+                    Owner.GetStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>().Level -= 1;
+                    if (Owner.GetStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>().Level == 0)
+                    {
+                        Owner.TryRemoveStatusEffect(Owner.GetStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>());
+                    }
+                }
                 if (Level > 0)
                 {
                     NotifyActivating();
@@ -179,9 +182,24 @@ namespace test.StatusEffects
             {
                 int num = Level - 1;
                 Level = num;
+                if (Owner.HasStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>())
+                {
+                    Owner.GetStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>().Level -= 1;
+                    if (Owner.GetStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>().Level == 0)
+                    {
+                        Owner.TryRemoveStatusEffect(Owner.GetStatusEffect<AyaAccelerationSeDef.AyaAccelerationSe>());
+                    }
+                }
                 if (Level == 0)
                 {
                     React(new RemoveStatusEffectAction(this, true));
+                }
+            }
+            public override string UnitEffectName
+            {
+                get
+                {
+                    return "GrazeLoop";
                 }
             }
         }

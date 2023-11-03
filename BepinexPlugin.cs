@@ -112,7 +112,9 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
+using test.Cards;
 using test.Exhibits;
+using test.Stages;
 using UnityEngine;
 using Untitled;
 using Untitled.ConfigDataBuilder;
@@ -136,6 +138,8 @@ namespace test
 
         internal static IResourceSource embeddedSource = new EmbeddedSource(Assembly.GetExecutingAssembly());
 
+        internal static DirectorySource directorySource = new DirectorySource(PluginInfo.GUID, "");
+
         static KeyboardShortcut TestF1Key = new KeyboardShortcut(KeyCode.F1);
 
         static KeyboardShortcut TestF2Key = new KeyboardShortcut(KeyCode.F2);
@@ -154,6 +158,8 @@ namespace test
 
             if (BepInEx.Bootstrap.Chainloader.PluginInfos.ContainsKey(AddWatermark.API.GUID))
                 WatermarkWrapper.ActivateWatermark();
+
+            NewBackgrounds.AddNewBackgrounds();
         }
 
         private void OnDestroy()
@@ -246,9 +252,22 @@ namespace test
                 // should not be changed
                 var cost = manaGroup;
                 var manaPanel = UiManager.GetPanel<BattleManaPanel>();
-                manaPanel._consumingDeque.Insert(0, new BattleManaPanel.ConsumingManaWidgets(new ConsumingMana(cost, new ManaGroup { Any = 0 }), manaPanel._unpooledCollection.Prepay(), manaPanel._pooledCollection.Prepay()));
+                manaPanel._consumingDeque.Insert(0, new BattleManaPanel.ConsumingManaWidgets(new ConsumingMana(cost, new ManaGroup() { Any = 0 }), new List<BattleManaWidget>() { }, new List<BattleManaWidget>() { }));
+
             }
         }
+        /*[HarmonyPatch(typeof(BattleManaPanel), nameof(BattleManaPanel.ConsumeAndReleaseManaWidget))]
+        class BattleManaPanel_ConsumeAndReleaseManaWidget_Patch
+        {
+            static bool Prefix(BattleManaPanel __instance)
+            {
+                if (StSAmplifySeDef.StSAmplifySe.card != null || StSBurstSeDef.StSBurstSe.card != null || StSDoubleTapSeDef.StSDoubleTapSe.card != null || StSEchoFormSeDef.StSEchoFormSe.card != null)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }*/
         /*[HarmonyPatch(typeof(BossStation), nameof(BossStation.GenerateBossRewards))]
         class BossStation_GenerateBossRewards_Patch
         {

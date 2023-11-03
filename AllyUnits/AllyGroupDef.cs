@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using LBoL.Base;
 using UnityEngine;
-using test.AllyUnits;
+using LBoL.Core;
 
-namespace LBoL.Core.Units
+namespace test.AllyUnits
 {
     // Token: 0x02000073 RID: 115
     public class AllyGroup : IEnumerable<AllyUnit>, IEnumerable
@@ -18,24 +18,24 @@ namespace LBoL.Core.Units
         // Token: 0x0600054D RID: 1357 RVA: 0x00010E88 File Offset: 0x0000F088
         internal AllyGroup(string id, IEnumerable<AllyGroupEntry.EntrySource> entries, EnemyType enemyType, string formationName, Vector2 playerRootV2, string preBattleDialogName, string postBattleDialogName, float debutTime)
         {
-            this.Id = id;
-            this._enemies = new List<AllyUnit>();
+            Id = id;
+            _enemies = new List<AllyUnit>();
             foreach (AllyGroupEntry.EntrySource entrySource in entries)
             {
                 AllyUnit AllyUnit = TypeFactory<AllyUnit>.CreateInstance(entrySource.Type);
                 AllyUnit AllyUnit2 = AllyUnit;
-                int num = this._index + 1;
-                this._index = num;
+                int num = _index + 1;
+                _index = num;
                 AllyUnit2.Index = num;
                 AllyUnit.RootIndex = entrySource.RootIndex;
-                this._enemies.Add(AllyUnit);
+                _enemies.Add(AllyUnit);
             }
-            this.EnemyType = enemyType;
-            this.FormationName = formationName;
-            this.PlayerRootV2 = playerRootV2;
-            this.PreBattleDialogName = preBattleDialogName;
-            this.PostBattleDialogName = postBattleDialogName;
-            this.DebutTime = debutTime;
+            EnemyType = enemyType;
+            FormationName = formationName;
+            PlayerRootV2 = playerRootV2;
+            PreBattleDialogName = preBattleDialogName;
+            PostBattleDialogName = postBattleDialogName;
+            DebutTime = debutTime;
         }
 
         // Token: 0x17000195 RID: 405
@@ -68,7 +68,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this._enemies.Count;
+                return _enemies.Count;
             }
         }
 
@@ -78,7 +78,7 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this._enemies.Where((AllyUnit e) => e.IsAlive);
+                return _enemies.Where((e) => e.IsAlive);
             }
         }
 
@@ -88,29 +88,29 @@ namespace LBoL.Core.Units
         {
             get
             {
-                return this._enemies.Where((AllyUnit e) => e.IsDead);
+                return _enemies.Where((e) => e.IsDead);
             }
         }
 
         // Token: 0x06000557 RID: 1367 RVA: 0x00010FE1 File Offset: 0x0000F1E1
         public IEnumerator<AllyUnit> GetEnumerator()
         {
-            return this._enemies.GetEnumerator();
+            return _enemies.GetEnumerator();
         }
 
         // Token: 0x06000558 RID: 1368 RVA: 0x00010FF3 File Offset: 0x0000F1F3
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return this.GetEnumerator();
+            return GetEnumerator();
         }
 
         // Token: 0x06000559 RID: 1369 RVA: 0x00010FFC File Offset: 0x0000F1FC
         internal void Add(AllyUnit enemy)
         {
-            int num = this._index + 1;
-            this._index = num;
+            int num = _index + 1;
+            _index = num;
             enemy.Index = num;
-            this._enemies.Add(enemy);
+            _enemies.Add(enemy);
         }
 
         // Token: 0x0400029C RID: 668

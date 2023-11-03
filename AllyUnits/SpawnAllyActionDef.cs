@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using LBoL.Core;
+using LBoL.Core.Battle;
+using LBoL.Core.Battle.BattleActions;
 using LBoL.Core.Cards;
 using LBoL.Core.StatusEffects;
 using LBoL.Core.Units;
 using LBoL.Presentation;
-using test.AllyUnits;
 
-namespace LBoL.Core.Battle.BattleActions
+namespace test.AllyUnits
 {
     public class SpawnAllyAction : SimpleEventBattleAction<UnitEventArgs>
     {
@@ -15,12 +17,12 @@ namespace LBoL.Core.Battle.BattleActions
         public SpawnAllyAction(PlayerUnit spawner, Type allyType, int rootIndex, float occupationTime = 0f, float fadeInDelay = 0.3f, bool isServant = true)
         {
             Args = new UnitEventArgs();
-            this._spawner = spawner;
-            this._allyType = allyType;
-            this._rootIndex = rootIndex;
-            this.OccupationTime = occupationTime;
-            this.FadeInDelay = fadeInDelay;
-            this._isServant = isServant;
+            _spawner = spawner;
+            _allyType = allyType;
+            _rootIndex = rootIndex;
+            OccupationTime = occupationTime;
+            FadeInDelay = fadeInDelay;
+            _isServant = isServant;
         }
 
         // Token: 0x06000DAC RID: 3500 RVA: 0x00024474 File Offset: 0x00022674
@@ -32,7 +34,7 @@ namespace LBoL.Core.Battle.BattleActions
         // Token: 0x06000DAD RID: 3501 RVA: 0x00024487 File Offset: 0x00022687
         public void MainPhase(BattleControllerAlly battleControllerAlly)
         {
-            Args.Unit = battleControllerAlly.SpawnAlly(this._spawner, this._allyType, this._rootIndex, this._isServant);
+            Args.Unit = battleControllerAlly.SpawnAlly(_spawner, _allyType, _rootIndex, _isServant);
             Args.IsModified = true;
         }
 
@@ -69,17 +71,17 @@ namespace LBoL.Core.Battle.BattleActions
         }
         internal AllyUnit SpawnAlly(PlayerUnit spawner, Type type, int rootIndex, bool isServant)
         {
-            return this.Spawn(spawner, CreateAllyUnit(type), rootIndex, isServant);
+            return Spawn(spawner, CreateAllyUnit(type), rootIndex, isServant);
         }
         private AllyUnit Spawn(PlayerUnit spawner, AllyUnit allyUnit, int rootIndex, bool isServant)
         {
             allyUnit.EnterGameRun(GameMaster.Instance.CurrentGameRun);
             allyUnit.RootIndex = rootIndex;
-            this.AllyGroup.Add(allyUnit);
+            AllyGroup.Add(allyUnit);
             allyUnit.EnterBattle(this);
             if (isServant)
             {
-                this.React(new ApplyStatusEffectAction<Servant>(allyUnit, null, null, null, null, 0f, true), null, ActionCause.None);
+                React(new ApplyStatusEffectAction<Servant>(allyUnit, null, null, null, null, 0f, true), null, ActionCause.None);
             }
             allyUnit.OnSpawn(spawner);
             return allyUnit;

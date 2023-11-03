@@ -97,8 +97,6 @@ namespace test.Exhibits
             {
                 GameRun.AdditionalRewardCardCount -= Value1;
             }
-
-            // Token: 0x0600090C RID: 2316 RVA: 0x000269E0 File Offset: 0x00024BE0
             protected override void OnRemoved(PlayerUnit player)
             {
                 GameRun.AdditionalRewardCardCount += Value1;

@@ -92,10 +92,9 @@ namespace test.StatusEffects
             {
                 foreach (Card card in Battle.EnumerateAllCards())
                 {
-                    if (card is AyaNews || card is HatateNews)
+                    if (card.CardType == CardType.Status && card.DebugName.Contains("News"))
                     {
-                        card.DeltaDamage = Level;
-                        card.IsExile = true;
+                        card.DeltaDamage += 10;
                         card.IsEthereal = true;
                         card.IsReplenish = true;
                     }
@@ -109,10 +108,9 @@ namespace test.StatusEffects
             {
                 foreach (Card card in args.Cards)
                 {
-                    if (card is AyaNews || card is HatateNews)
+                    if (card.CardType == CardType.Status && card.DebugName.Contains("News"))
                     {
-                        card.DeltaDamage = Level;
-                        card.IsExile = true;
+                        card.DeltaDamage += 10;
                         card.IsEthereal = true;
                         card.IsReplenish = true;
                     }
@@ -122,10 +120,9 @@ namespace test.StatusEffects
             {
                 foreach (Card card in args.Cards)
                 {
-                    if (card is AyaNews || card is HatateNews)
+                    if (card.CardType == CardType.Status && card.DebugName.Contains("News"))
                     {
-                        card.DeltaDamage = Level;
-                        card.IsExile = true;
+                        card.DeltaDamage += 10;
                         card.IsEthereal = true;
                         card.IsReplenish = true;
                     }
