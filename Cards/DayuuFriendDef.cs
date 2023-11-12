@@ -36,6 +36,7 @@ using LBoL.EntityLib.Cards.Neutral.MultiColor;
 using LBoL.Presentation.UI.Panels;
 using LBoL.Core.GapOptions;
 using Mono.Cecil;
+using test.EnemyUnits;
 
 namespace test.Cards
 {
@@ -214,9 +215,9 @@ namespace test.Cards
                 Loyalty += UltimateCost;
                 UltimateUsed = true;
                 yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies.Where((EnemyUnit enemyUnit) => !(enemyUnit is Hexagon)))
                 {
-                    if (enemyUnit.Hp <= (enemyUnit.MaxHp + 1) / 4)
+                    if (enemyUnit.Hp <= Math.Min((enemyUnit.MaxHp + 1) / 4, 100))
                     {
                         yield return new ForceKillAction(Battle.Player, enemyUnit);
                     }
@@ -485,9 +486,9 @@ namespace test.Cards
                 Loyalty += UltimateCost;
                 UltimateUsed = true;
                 yield return PerformAction.Effect(Battle.Player, "Wave1s", 0f, "BirdSing", 0f, PerformAction.EffectBehavior.PlayOneShot, 0f);
-                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies)
+                foreach (EnemyUnit enemyUnit in Battle.AllAliveEnemies.Where((EnemyUnit enemyUnit) => !(enemyUnit is Hexagon)))
                 {
-                    if (enemyUnit.Hp <= (enemyUnit.MaxHp + 1) / (IsUpgraded ? 3 : 4))
+                    if (enemyUnit.Hp <= Math.Min((enemyUnit.MaxHp + 1) / (IsUpgraded ? 3 : 4), (IsUpgraded ? 150 : 100)))
                     {
                         yield return new ForceKillAction(Battle.Player, enemyUnit);
                     }

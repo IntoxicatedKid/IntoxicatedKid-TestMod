@@ -7,3 +7,15 @@ AyaBoss:
   Title: 'Traditional Reporter of Fantasy'
   Move:
   - 'TBD'
+StSShield:
+  Title: 'Shield of Spire'
+  Move:
+  - 'Bash'
+  - 'Fortify'
+  - 'Smash'
+StSSpear:
+  Title: 'Spear of Spire'
+  Move:
+  - 'Burn Strike'
+  - 'Piercer'
+  - 'Skewer'

@@ -41,6 +41,7 @@ using LBoL.EntityLib.EnemyUnits.Normal;
 using System.Runtime.CompilerServices;
 using LBoL.Core.GapOptions;
 using System.Reflection.Emit;
+using static test.Exhibits.StSBustedCrownDef;
 
 namespace test.Exhibits
 {
@@ -97,7 +98,7 @@ namespace test.Exhibits
         }
         [EntityLogic(typeof(StSEctoplasmDef))]
         [UsedImplicitly]
-        [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 0)]
+        [ExhibitInfo(WeighterType = typeof(StSEctoplasmWeighter))]
         public sealed class StSEctoplasm : ShiningExhibit
         {
             [HarmonyPatch(typeof(GameRunController), nameof(GameRunController.InternalGainMoney))]
@@ -132,6 +133,17 @@ namespace test.Exhibits
                 {
                     NotifyActivating();
                 });
+            }
+            private class StSEctoplasmWeighter : IExhibitWeighter
+            {
+                public float WeightFor(Type type, GameRunController gameRun)
+                {
+                    if (gameRun.CurrentStage.Level > 2 || gameRun.Player.HasExhibit<StSBustedCrown>() || gameRun.Player.HasExhibit<StSCursedKeyDef.StSCursedKey>() || gameRun.Player.HasExhibit<StSEctoplasmDef.StSEctoplasm>() || gameRun.Player.HasExhibit<StSPhilosophersStoneDef.StSPhilosophersStone>() || gameRun.Player.HasExhibit<StSRunicDomeDef.StSRunicDome>() || gameRun.Player.HasExhibit<StSVelvetChokerDef.StSVelvetChoker>())
+                    {
+                        return 0f;
+                    }
+                    return 1f;
+                }
             }
         }
     }

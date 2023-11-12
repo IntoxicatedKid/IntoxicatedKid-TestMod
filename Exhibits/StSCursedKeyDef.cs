@@ -36,6 +36,7 @@ using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using LBoL.Core.Stations;
+using static test.Exhibits.StSBustedCrownDef;
 
 namespace test.Exhibits
 {
@@ -92,7 +93,7 @@ namespace test.Exhibits
         }
         [EntityLogic(typeof(StSCursedKeyDef))]
         [UsedImplicitly]
-        [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 0)]
+        [ExhibitInfo(WeighterType = typeof(StSCursedKeyWeighter))]
         public sealed class StSCursedKey : ShiningExhibit
         {
             protected override void OnAdded(PlayerUnit player)
@@ -106,6 +107,17 @@ namespace test.Exhibits
                         GameRun.AddDeckCard(card, false, null);
                     }
                 });
+            }
+            private class StSCursedKeyWeighter : IExhibitWeighter
+            {
+                public float WeightFor(Type type, GameRunController gameRun)
+                {
+                    if (gameRun.CurrentStage.Level > 2 || gameRun.Player.HasExhibit<StSBustedCrown>() || gameRun.Player.HasExhibit<StSCursedKeyDef.StSCursedKey>() || gameRun.Player.HasExhibit<StSEctoplasmDef.StSEctoplasm>() || gameRun.Player.HasExhibit<StSPhilosophersStoneDef.StSPhilosophersStone>() || gameRun.Player.HasExhibit<StSRunicDomeDef.StSRunicDome>() || gameRun.Player.HasExhibit<StSVelvetChokerDef.StSVelvetChoker>())
+                    {
+                        return 0f;
+                    }
+                    return 1f;
+                }
             }
         }
     }

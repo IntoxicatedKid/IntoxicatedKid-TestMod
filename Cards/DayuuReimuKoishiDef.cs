@@ -43,6 +43,7 @@ using HarmonyLib;
 using UnityEngine;
 using System.Numerics;
 using LBoL.Core.Battle.Interactions;
+using LBoL.EntityLib.StatusEffects.ExtraTurn.Partners;
 
 namespace test.Cards
 {
@@ -221,7 +222,7 @@ namespace test.Cards
             }
         }
         static Unit target = null;
-        static List<Type> buffs1 = new List<Type>() { typeof(BurstUpgrade), typeof(LimitedDamage), typeof(WindGirl), typeof(AbsorbPower), typeof(AbsorbSpirit), typeof(Curiosity), typeof(EnemyDayaojing), typeof(FlatPeach), typeof(PowerByDefense), typeof(YonglinCardSe), typeof(HuiyeManaSe), typeof(BailianFireSe), typeof(DoubleJKSe), typeof(PrismriverSe), typeof(YukariFriendSe), typeof(MeihongPowerSe), typeof(RainbowMarketSe), typeof(MoonWorldSe) };
+        static List<Type> buffs1 = new List<Type>() { typeof(BurstUpgrade), typeof(LimitedDamage), typeof(WindGirl), typeof(AbsorbPower), typeof(AbsorbSpirit), typeof(Curiosity), typeof(EnemyDayaojing), typeof(FlatPeach), typeof(PowerByDefense), typeof(YonglinCardSe), typeof(HuiyeManaSe), typeof(BailianFireSe), typeof(SuperExtraTurn), typeof(PrismriverSe), typeof(YukariFriendSe), typeof(MeihongPowerSe), typeof(RainbowMarketSe), typeof(MoonWorldSe) };
         static List<Type> buffs2 = new List<Type>() { typeof(Firepower), typeof(Spirit), typeof(DroneBlock), typeof(RockHard), typeof(SeeFengshuiSe), typeof(DizangLoveSe), typeof(BlackPoisonSe), typeof(HekaHellRainSe), typeof(MeilingAbilitySe), typeof(RinDrawSe), typeof(SkyWaterSe), typeof(TodayYesterdaySe), typeof(YachieDefendSe), typeof(YonglinUpgradeSe) };
         static List<Type> buffs3 = new List<Type>() { typeof(Electric), typeof(LoveGirlDamageReduce), typeof(ShannvAbilitySe), typeof(RangziFanshuSe), typeof(MeihongFireSe), typeof(KokoroDanceSe), typeof(ModuoluoFireSe), typeof(ShirenKunchongSe) };
         static List<Type> tempBuffsP1 = new List<Type>() { typeof(Charging), typeof(Graze), typeof(TempFirepower), typeof(TempSpirit) };
@@ -233,7 +234,7 @@ namespace test.Cards
         //static List<Type> debuffs1 = new List<Type>() { };
         static List<Type> debuffs2 = new List<Type>() { typeof(FirepowerNegative), /*typeof(SpiritNegative),*/ typeof(TiangouOrderSe) };
         static List<Type> debuffs3 = new List<Type>() { typeof(Drowning), typeof(LoveGirlDamageIncrease) };
-        static List<Type> tempDebuffs1 = new List<Type>() { typeof(NoAttackDamageThisTurn)/*, typeof(CatchGoblinSe)*/ };
+        static List<Type> tempDebuffs1 = new List<Type>() { typeof(LunaClockSe)/*, typeof(CatchGoblinSe)*/ };
         static List<Type> tempDebuffs2 = new List<Type>() { /*typeof(Fragil),*/ typeof(LockedOn), typeof(TempFirepowerNegative), /*typeof(TempSpiritNegative),*/ typeof(Vulnerable), typeof(Weak) };
         static List<Type> tempDebuffs3 = new List<Type>() { typeof(Poison) };
         /*

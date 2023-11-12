@@ -42,7 +42,7 @@ namespace test.EnemyGroups
         {
             static void Prefix(FinalStage __instance)
             {
-                __instance.BossPool.Add("Hexagon", 99f);
+                __instance.BossPool.Add("Hexagon", 0.1f);
             }
         }
     }

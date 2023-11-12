@@ -4,3 +4,9 @@ AyaPlayerUnit:
 Hexagon:
   Default: Hexagon
   Short: Hexagon
+StSShield:
+  Default: Spire Shield
+  Short: Spire Shield
+StSSpear:
+  Default: Spire Spear
+  Short: Spire Spear

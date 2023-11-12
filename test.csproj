@@ -410,6 +410,7 @@
       <None Remove="Resources\StSAlchemize.png" />
       <None Remove="Resources\StSAmplify.png" />
       <None Remove="Resources\StSAmplifySe.png" />
+      <None Remove="Resources\StSBackAttackSe.png" />
       <None Remove="Resources\StSBandageUp.png" />
       <None Remove="Resources\StSBlind.png" />
       <None Remove="Resources\StSBlueCandle.png" />
@@ -488,6 +489,7 @@
       <None Remove="Resources\StSSozu.png" />
       <None Remove="Resources\StSSsserpentHead.png" />
       <None Remove="Resources\StSStrangeSpoon.png" />
+      <None Remove="Resources\StSSurroundedSe.png" />
       <None Remove="Resources\StSSwiftStrike.png" />
       <None Remove="Resources\StSTerrorSe.png" />
       <None Remove="Resources\StSTerrorsuwaneko.png" />

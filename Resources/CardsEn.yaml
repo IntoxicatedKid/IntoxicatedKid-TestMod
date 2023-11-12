@@ -94,8 +94,8 @@ AyaTakePicture:
   UpgradedDescription: "Deal {Damage} damage.\nAdd {Value1} |Bunbunmaru Newspaper| to the draw pile."
   Name: Take Picture
 AyaTerukuniShiningThroughHeavenandEarth:
-  Description: "Whenever {PlayerName} plays a card, played twice and lose {Value1} maximum life.\nEnd the turn. Then, take an extra turn.\n|p:{SelfName} can only played once per run.|\n|Limited\u3010{Value2}\u3011|"
-  UpgradedDescription: "Whenever {PlayerName} plays a card, played twice and lose {Value1} maximum life.\nEnd the turn. Then, take an extra turn.\n|p:{SelfName} can only played once per run.|\n|Limited\u3010{Value2}\u3011|"
+  Description: "Whenever {PlayerName} plays a card, played twice and lose {Value1} maximum life. This effect does not stack.\nEnd the turn. Then, take an extra turn.\n|Limited\u3010{Value2}\u3011|"
+  UpgradedDescription: "Whenever {PlayerName} plays a card, played twice and lose {Value1} maximum life. This effect does not stack.\nEnd the turn. Then, take an extra turn.\n|Limited\u3010{Value2}\u3011|"
   Name: Terukuni Shining Through Heaven and Earth
   DetailText: "{SelfName} cannot be produced by other cards."
 AyaWhatRemains:
@@ -135,8 +135,8 @@ DayuuFriend:
   UpgradedDescription: "{FriendP}|f:Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy."
   ExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
   UpgradedExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
-  ExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
-  UpgradedExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  ExtraDescription2: "{FriendU}|u:The Song of Skulls|: Defeat each enemy with 25% and 100 or less life. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  UpgradedExtraDescription2: "{FriendU}|u:The Song of Skulls|: Defeat each enemy with 25% and 100 or less life. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
   Name: Dayuu, Sparrow of Sobs and Skulls
   FlavorText: ":sob:"
 DayuuFriend2:
@@ -144,8 +144,8 @@ DayuuFriend2:
   UpgradedDescription: "{FriendP}|f:Sobbing Cries|: Apply {Value1} |Temporary Firepower Down| to each enemy {Value1} times."
   ExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value2} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
   UpgradedExtraDescription1: "{FriendA}|a:The Song of Sobs|: Apply {Value1} |Firepower Down| and |Weak| to each enemy. Doesn't discarded."
-  ExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 25%, defeat it. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
-  UpgradedExtraDescription2: "{FriendU}|u:The Song of Skulls|: If enemies' life is less than 33%, defeat it. Then, apply 6 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  ExtraDescription2: "{FriendU}|u:The Song of Skulls|: Defeat each enemy with 25% and 100 or less life. Then, apply 3 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
+  UpgradedExtraDescription2: "{FriendU}|u:The Song of Skulls|: Defeat each enemy with 33% and 150 or less life. Then, apply 6 |Firepower Down|, |Weak| and |Vulnerable| to each enemy."
   Name: Dayuu, Sparrow of Sobs and Skulls+
   FlavorText: ":sob:"
 DayuuExodia:
@@ -189,6 +189,24 @@ DayuuReimuSakuya:
   UpgradedDescription: "TBD"
   Name: Delicacy
   //DetailText: "{SelfName} can only be acquired if {PlayerName} has both Reimu and Sakuya's starting Exhibit."
+DayuuZosit:
+  Description: "Choose 1 of {Value1} random Rare cards to add to the hand. It |costs| {Mana}, gains |Next Turn Lose|."
+  UpgradedDescription: "Choose 1 of {Value1} random Rare cards to add to the hand. It |costs| {Mana}, gains |Next Turn Lose|."
+  Name: Zosit
+DayuuZosit2:
+  Description: "{FriendP}When there are a total of {Value1} |Nightmares| in the |battlefield|, {PlayerName} loses the game."
+  UpgradedDescription: "{FriendP}When there are a total of {Value1} |Nightmares| in the |battlefield|, {PlayerName} loses the game."
+  ExtraDescription1: "{FriendA}Choose 1 of {Value2} random Rare cards to add to the hand. Then, add a |Nightmare| to the random |battlefield|. It removes from combat when played.\nRemain {SelfName} in the hand."
+  UpgradedExtraDescription1: "{FriendA}Choose 1 of {Value2} random Rare cards to add to the hand. Then, add a |Nightmare| to the random |battlefield|. It removes from combat when played.\nRemain {SelfName} in the hand."
+  ExtraDescription2: "\n|When discarded or Exiled|: Return {SelfName} to the hand."
+  UpgradedExtraDescription2: "\n|When discarded or Exiled|: Return {SelfName} to the hand."
+  Name: Zosit, The Dealmaker
+DayuuZosit3:
+  Description: "{FriendA}Choose 1 of {Value1} random Rare cards to add to the hand. It |costs| {Mana}."
+  UpgradedDescription: "{FriendA}Choose 1 of {Value1} random Rare cards to add to the hand. It |costs| {Mana}."
+  ExtraDescription1: "The first time {SelfName}'s skill is used, {PlayerName} gains 100 maximum life limit. Maximum life cannot exceed this limit.\nSecond and onward uses decrease this limit by 9. If the limit reached 0, {PlayerName} loses the game."
+  UpgradedExtraDescription1: "The first time {SelfName}'s skill is used, {PlayerName} gains 100 maximum life limit. Maximum life cannot exceed this limit.\nSecond and onward uses decrease this limit by 9. If the limit reached 0, {PlayerName} loses the game."
+  Name: Zosit, The Dealmaker
 NitoriBlueprint:
   Description: "Show all |Blueprints| you currently have."
   Name: Blueprint

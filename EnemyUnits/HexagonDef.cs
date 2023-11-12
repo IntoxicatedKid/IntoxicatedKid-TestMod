@@ -16,6 +16,7 @@ using LBoL.EntityLib.Cards.Other.Enemy;
 using LBoL.EntityLib.EnemyUnits.Character;
 using LBoL.EntityLib.Exhibits.Shining;
 using LBoL.EntityLib.JadeBoxes;
+using LBoL.EntityLib.Stages.NormalStages;
 using LBoL.EntityLib.StatusEffects.Enemy;
 using LBoL.Presentation;
 using LBoL.Presentation.UI.Panels;
@@ -35,6 +36,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading;
+using test.JadeBoxes;
 using test.PlayerUnits;
 using test.Stages;
 using UnityEngine;
@@ -50,6 +52,7 @@ namespace test.EnemyUnits
         public override IdContainer GetId() => nameof(Hexagon);
         public override LocalizationOption LoadLocalization()
         {
+            AddBossNodeIcon("Hexagon", () => ResourceLoader.LoadSprite("Hexagon.png", directorySource));
             var locFiles = new LocalizationFiles(embeddedSource);
             locFiles.AddLocaleFile(Locale.En, "Resources.EnemyUnitsEn.yaml");
             return locFiles;
@@ -108,6 +111,17 @@ namespace test.EnemyUnits
     [EntityLogic(typeof(HexagonDef))]
     public sealed class Hexagon : EnemyUnit
     {
+        private static GameObject background = StageTemplate.TryGetEnvObject(NewBackgrounds.HexagonBackground);
+        [HarmonyPatch(typeof(GameMaster), nameof(GameMaster.LeaveGameRun))]
+        class GameMaster_LeaveGameRun_Patch
+        {
+            static void Postfix(GameMaster __instance)
+            {
+                BgmConfig.FromID(new HexagonBgm().UniqueId).LoopStart = 118.25f;
+                BgmConfig.FromID(new HexagonBgm().UniqueId).LoopEnd = 236.4f;
+                background.SetActive(false);
+            }
+        }
         [UsedImplicitly]
         public override string Name
         {
@@ -116,7 +130,6 @@ namespace test.EnemyUnits
                 return "Hexagon";
             }
         }
-        private GameObject background = StageTemplate.TryGetEnvObject(NewBackgrounds.HexagonBackground);
         private MoveType Next { get; set; }
         private string SpellGameOver
         {
@@ -134,15 +147,16 @@ namespace test.EnemyUnits
         }
         protected override void OnEnterBattle(BattleController battle)
         {
+            BgmConfig.FromID(new HexagonBgm().UniqueId).LoopStart = 0f;
+            BgmConfig.FromID(new HexagonBgm().UniqueId).LoopEnd = 338f;
             if (GameMaster.Instance.CurrentGameRun.CurrentStation.Type != StationType.Boss)
             {
-                BgmConfig.FromID(new HexagonBgm().UniqueId).LoopStart = 0f;
-                BgmConfig.FromID(new HexagonBgm().UniqueId).LoopEnd = 336.004f;
                 AudioManager.PlayInLayer1("Hexagon");
             }
             background.SetActive(true);
             Next = MoveType.GameOver;
             ReactBattleEvent(Battle.BattleStarted, new System.Func<GameEventArgs, IEnumerable<BattleAction>>(OnBattleStarted));
+            ReactBattleEvent(TurnStarted, new System.Func<GameEventArgs, IEnumerable<BattleAction>>(OnTurnStarted));
             HandleBattleEvent(Battle.Player.TurnEnded, delegate (UnitEventArgs _)
             {
                 if (Hp <= 1)
@@ -158,7 +172,21 @@ namespace test.EnemyUnits
             //yield return new CastBlockShieldAction(this, Defend, Defend, BlockShieldType.Normal, false);
             yield return new ApplyStatusEffectAction<LBoL.Core.StatusEffects.ExtraTurn>(Battle.Player, Count1, null, null, null, 0f, true);
             yield return new ApplyStatusEffectAction<HexagonSeDef.HexagonSe>(this, 0, null, 10, null, 0f, true);
-            GameMaster.Instance.StartCoroutine(Announce());
+            //GameMaster.Instance.StartCoroutine(Announce());
+            yield break;
+        }
+        private IEnumerable<BattleAction> OnTurnStarted(GameEventArgs arg)
+        {
+            if (Hp <= 1)
+            {
+                Next = MoveType.Wonderful;
+                UpdateTurnMoves();
+            }
+            else
+            {
+                Next = MoveType.GameOver;
+                UpdateTurnMoves();
+            }
             yield break;
         }
         protected override void OnLeaveBattle()
@@ -167,12 +195,18 @@ namespace test.EnemyUnits
             BgmConfig.FromID(new HexagonBgm().UniqueId).LoopEnd = 236.4f;
             background.SetActive(false);
         }
+        /*protected override void OnLeaveGameRun()
+        {
+            BgmConfig.FromID(new HexagonBgm().UniqueId).LoopStart = 118.25f;
+            BgmConfig.FromID(new HexagonBgm().UniqueId).LoopEnd = 236.4f;
+            background.SetActive(false);
+        }*/
         /*IEnumerator HexagonBackgroundOff(GameObject gameObject)
         {
             yield return new WaitForSeconds(5f);
             gameObject.SetActive(false);
         }*/
-        private IEnumerator Announce()
+        /*private IEnumerator Announce()
         {
             yield return new WaitForSecondsRealtime(30f);
             yield return PerformAction.Chat(this, "Point", 1f, 0f, 0f, true);
@@ -186,7 +220,7 @@ namespace test.EnemyUnits
             yield return PerformAction.Chat(this, "Pentagon", 1f, 0f, 0f, true);
             yield return new WaitForSecondsRealtime(30f);
             yield return PerformAction.Chat(this, "Hexagon", 1f, 0f, 0f, true);
-        }
+        }*/
         private IEnumerable<BattleAction> GameOver()
         {
             Battle.Player.ClearStatusEffects();
@@ -303,7 +337,7 @@ namespace test.EnemyUnits
         {
             var statusEffectConfig = new StatusEffectConfig(
                 Id: "",
-                Order: 0,
+                Order: 99,
                 Type: StatusEffectType.Special,
                 IsVerbose: false,
                 IsStackable: false,
@@ -338,9 +372,32 @@ namespace test.EnemyUnits
                     return (Owner as EnemyUnit).Count2 + DifficultyDamage;
                 }
             }
-            int DifficultyDamage = 0;
+            private int DifficultyDamage = 0;
             protected override void OnAdded(Unit unit)
             {
+                HandleOwnerEvent(Battle.Player.BlockShieldGaining, delegate (BlockShieldEventArgs args)
+                {
+                    if (args.Block != 0f)
+                    {
+                        args.Block = Math.Max(Math.Min(Math.Min(250, args.Block), 250 - Battle.Player.Block), 0f);
+                    }
+                    if (args.Shield != 0f)
+                    {
+                        args.Shield = Math.Max(Math.Min(Math.Min(250, args.Shield), 250 - Battle.Player.Shield), 0f);
+                    }
+                    args.AddModifier(this);
+                });
+                HandleOwnerEvent(Battle.Player.BlockShieldGained, delegate (BlockShieldEventArgs args)
+                {
+                    if (Battle.Player.Block > 250)
+                    {
+                        Battle.Player.Block = 250;
+                    }
+                    if (Battle.Player.Shield > 250)
+                    {
+                        Battle.Player.Shield = 250;
+                    }
+                });
                 HandleOwnerEvent(unit.DamageTaking, new GameEventHandler<DamageEventArgs>(OnDamageTaking));
                 ReactOwnerEvent(Battle.CardUsed, new EventSequencedReactor<CardUsingEventArgs>(OnCardUsed));
                 GameMaster.Instance.StartCoroutine(Difficulty());
@@ -398,7 +455,8 @@ namespace test.EnemyUnits
                         else if (Battle.Player.Hp == 1)
                         {
                             GameMaster.Instance.CurrentGameRun.Battle.Player.ClearStatusEffects();
-                            GameMaster.Instance.CurrentGameRun.Battle.RequestEndPlayerTurn();
+                            Battle.PlayerTurnShouldEnd = true;
+                            Battle._isWaitingPlayerInput = false;
                             break;
                         }
                         else if (Battle.Player.Hp > 1)
@@ -414,13 +472,14 @@ namespace test.EnemyUnits
                 while (Owner.Hp > 1)
                 {
                     GameMaster.Instance.CurrentGameRun.SetEnemyHpAndMaxHp(Math.Max(Owner.Hp - 3, 1), Owner.MaxHp, Owner as EnemyUnit, false);
-                    yield return new WaitForSecondsRealtime(0.11f);//0.0835f);
+                    yield return new WaitForSecondsRealtime(0.0836f);
                 }
                 if (Battle.Player.HasStatusEffect<LBoL.Core.StatusEffects.ExtraTurn>())
                 {
                     Battle.Player.TryRemoveStatusEffect(Battle.Player.GetStatusEffect<LBoL.Core.StatusEffects.ExtraTurn>());
                 }
-                GameMaster.Instance.CurrentGameRun.Battle.RequestEndPlayerTurn();
+                Battle.PlayerTurnShouldEnd = true;
+                Battle._isWaitingPlayerInput = false;
             }
             private IEnumerator Difficulty()
             {
@@ -439,7 +498,7 @@ namespace test.EnemyUnits
             }
             private IEnumerable<BattleAction> OnCardUsed(CardUsingEventArgs args)
             {
-                if (Battle.Player.IsInTurn && Level > 0)
+                if (Battle.Player.IsInTurn && Level > 0 && Owner.Hp > 1)
                 {
                     NotifyActivating();
                     yield return new DamageAction(Owner, Battle.Player, DamageInfo.Reaction(Level), "扩散结界", GunType.Single);
@@ -481,19 +540,5 @@ namespace test.EnemyUnits
 
             return config;
         }
-        /*[HarmonyPatch(typeof(BattleController), nameof(BattleController.StartBattle))]
-        class BattleController_StartBattle_Patch
-        {
-            //public static bool Changed;
-            static void Postfix(BattleController __instance)
-            {
-                if (GameMaster.Instance.CurrentGameRun.CurrentStation.Type != StationType.Boss)
-                {
-                    BgmConfig.FromID(new HexagonBgm().UniqueId).LoopStart = 0f;
-                    BgmConfig.FromID(new HexagonBgm().UniqueId).LoopEnd = 999f;//336.004f;
-                    AudioManager.PlayInLayer1("Hexagon");
-                }
-            }
-        }*/
     }
 }

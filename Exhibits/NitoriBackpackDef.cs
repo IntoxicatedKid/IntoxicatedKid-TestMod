@@ -42,6 +42,7 @@ using HarmonyLib;
 using LBoL.EntityLib.Cards.Character.Cirno;
 using test.Cards;
 using LBoL.Presentation.UI;
+using LBoL.Presentation.UI.Widgets;
 
 namespace test.Exhibits
 {
@@ -99,12 +100,12 @@ namespace test.Exhibits
         [UsedImplicitly]
         public sealed class NitoriBackpack : ShiningExhibit
         {
-            [HarmonyPatch(typeof(SystemBoard), nameof(SystemBoard.OnExhibitClick))]
-            class SystemBoard_OnExhibitClick_Patch
+            [HarmonyPatch(typeof(ExhibitWidget), nameof(ExhibitWidget.OnExhibitClicked))]
+            class ExhibitWidget_OnExhibitClicked_Patch
             {
-                static void Postfix(SystemBoard __instance, Exhibit exhibit)
+                static void Postfix(ExhibitWidget __instance)
                 {
-                    if (exhibit is NitoriBackpack && GameMaster.Instance.CurrentGameRun.Player.HasExhibit<NitoriBackpack>())
+                    if (__instance.Exhibit is NitoriBackpack && GameMaster.Instance.CurrentGameRun.Player.HasExhibit<NitoriBackpack>())
                     {
                         GameMaster.Instance.StartCoroutine(Proceed());
                     }

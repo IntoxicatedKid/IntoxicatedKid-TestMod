@@ -130,7 +130,7 @@ namespace test.Cards
     public sealed class AyaTerukuniShiningThroughHeavenandEarth : Card
     {
         static bool PoolQue = false;
-        static bool Played = false;
+        //static bool Played = false;
         [HarmonyPatch(typeof(BattleController), nameof(BattleController.StartBattle))]
         class BattleController_StartBattle_Patch
         {
@@ -155,7 +155,7 @@ namespace test.Cards
                 }
             }
         }
-        [HarmonyPatch(typeof(GameRunController), nameof(GameRunController.EnterStation))]
+        /*[HarmonyPatch(typeof(GameRunController), nameof(GameRunController.EnterStation))]
         class GameRunController_EnterStation_Patch
         {
             static void Postfix(GameRunController __instance)
@@ -165,7 +165,7 @@ namespace test.Cards
                     CardConfig.FromId("AyaTerukuniShiningThroughHeavenandEarth").IsPooled = false;
                 }
             }
-        }
+        }*/
         /*public override bool Triggered
         {
             get
@@ -180,14 +180,14 @@ namespace test.Cards
                 return Battle != null && played == false;
             }
         }*/
-        public override void Initialize()
+        /*public override void Initialize()
         {
             base.Initialize();
             if (DeckCounter > 0)
             {
                 Played = true;
             }
-        }
+        }*/
         protected override IEnumerable<BattleAction> Actions(UnitSelector selector, ManaGroup consumingMana, Interaction precondition)
         {
             yield return PerformAction.Spell(Battle.Player, "AyaLastWord");
@@ -201,15 +201,17 @@ namespace test.Cards
         public override IEnumerable<BattleAction> AfterUseAction()
         {
             base.AfterUseAction();
-            DeckCounter += 1;
-            CardConfig.FromId("AyaTerukuniShiningThroughHeavenandEarth").IsPooled = false;
+            /*DeckCounter += 1;
             Card[] cards = GameRun.BaseDeck.Where((Card card) => card is AyaTerukuniShiningThroughHeavenandEarth).ToArray();
             Battle.GameRun.RemoveDeckCards(cards, false);
             List<Card> list = Battle.EnumerateAllCards().Where((Card card) => card is AyaTerukuniShiningThroughHeavenandEarth).ToList();
             foreach (Card card in list)
             {
                 yield return new RemoveCardAction(card);
-            }
+            }*/
+            Card deckCardByInstanceId = Battle.GameRun.GetDeckCardByInstanceId(InstanceId);
+            Battle.GameRun.RemoveDeckCards(new Card[] { deckCardByInstanceId }, false);
+            yield return new RemoveCardAction(this);
             yield break;
         }
     }
@@ -514,6 +516,39 @@ namespace test.Cards
 
         public override UniTask<AudioClip> LoadAudioClipAsync()
         {
+            return ResourceLoader.LoadAudioClip("Demetori - Tengu is Watching ~ Eye of the Needles.ogg", AudioType.OGGVORBIS, directorySource);
+
+        }
+
+        public override BgmConfig MakeConfig()
+        {
+            var config = new BgmConfig(
+                    ID: "",
+                    No: sequenceTable.Next(typeof(BgmConfig)),
+                    Show: true,
+                    Name: "",
+                    Folder: "",
+                    Path: "",
+                    LoopStart: (float?)54.35,
+                    LoopEnd: (float?)241,
+                    TrackName: "Tengu is Watching ~ Eye of the Needles",
+                    Artist: "Demetori",
+                    Original: "天狗が見ている　～ Black Eyes",
+                    Comment: ""
+            );
+
+            return config;
+        }
+    }
+    /*public sealed class AyaSpellBgm : BgmTemplate
+    {
+        public override IdContainer GetId()
+        {
+            return nameof(AyaSpellBgm);
+        }
+
+        public override UniTask<AudioClip> LoadAudioClipAsync()
+        {
             return ResourceLoader.LoadAudioClip("Demetori - The Youkai Mountain ~ Mysterious Mountain.ogg", AudioType.OGGVORBIS, directorySource);
 
         }
@@ -537,5 +572,5 @@ namespace test.Cards
 
             return config;
         }
-    }
+    }*/
 }

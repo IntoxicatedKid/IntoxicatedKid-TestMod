@@ -180,7 +180,9 @@ namespace test.Cards
                 NotifyActivating();
                 Loyalty += UltimateCost;
                 UltimateUsed = true;
+                Battle.MaxHand += 1;
                 Card friend = Library.CreateCard<DayuuFriend2>();
+                Battle.MaxHand -= 1;
                 friend.IsUpgraded = true;
                 friend.Summon();
                 yield return new AddCardsToHandAction(friend);
@@ -215,7 +217,14 @@ namespace test.Cards
                 {
                     card.SetBaseCost(ManaGroup.Anys(card.ConfigCost.Amount));
                 }
-                yield return new AddCardsToHandAction(list);
+                if (Battle.MaxHand > Battle.HandZone.Count)
+                {
+                    yield return new AddCardsToHandAction(list);
+                }
+                else
+                {
+                    yield return new AddCardsToDiscardAction(list);
+                }
                 num = i;
             }
             if (Loyalty >= 7)
@@ -223,10 +232,12 @@ namespace test.Cards
                 NotifyActivating();
                 Loyalty += UltimateCost;
                 UltimateUsed = true;
-                Card friend2 = Library.CreateCard<DayuuFriend2>();
-                friend2.IsUpgraded = true;
-                friend2.Summon();
-                yield return new AddCardsToHandAction(friend2);
+                Card friend = Library.CreateCard<DayuuFriend2>();
+                friend.IsUpgraded = true;
+                friend.Summon();
+                Battle.MaxHand += 1;
+                yield return new AddCardsToHandAction(friend);
+                Battle.MaxHand -= 1;
                 yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return DebuffAction<Vulnerable>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
@@ -254,7 +265,14 @@ namespace test.Cards
                     card.SetBaseCost(ManaGroup.Anys(card.ConfigCost.Amount));
                     card.IsUpgraded = true;
                 }
-                yield return new AddCardsToHandAction(list);
+                if (Battle.MaxHand > Battle.HandZone.Count)
+                {
+                    yield return new AddCardsToHandAction(list);
+                }
+                else
+                {
+                    yield return new AddCardsToDiscardAction(list);
+                }
                 yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
             }
@@ -262,10 +280,12 @@ namespace test.Cards
             {
                 Loyalty += UltimateCost;
                 UltimateUsed = true;
-                Card friend3 = Library.CreateCard<DayuuFriend2>();
-                friend3.IsUpgraded = true;
-                friend3.Summon();
-                yield return new AddCardsToHandAction(friend3);
+                Card friend = Library.CreateCard<DayuuFriend2>();
+                friend.IsUpgraded = true;
+                friend.Summon();
+                Battle.MaxHand += 1;
+                yield return new AddCardsToHandAction(friend);
+                Battle.MaxHand -= 1;
                 yield return DebuffAction<Weak>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return DebuffAction<Fragil>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);
                 yield return DebuffAction<Vulnerable>(Battle.Player, 0, Value1, 0, 0, true, 0.2f);

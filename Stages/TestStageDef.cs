@@ -2,6 +2,9 @@
 using LBoL.ConfigData;
 using LBoL.Core;
 using LBoL.Core.Randoms;
+using LBoL.Core.Stations;
+using LBoL.EntityLib.EnemyUnits.Character;
+using LBoL.EntityLib.Exhibits;
 using LBoL.EntityLib.Exhibits.Shining;
 using LBoL.EntityLib.Stages;
 using LBoL.EntityLib.Stages.NormalStages;
@@ -22,24 +25,38 @@ using static test.BepinexPlugin;
 namespace test.Stages
 {
     /*[OverwriteVanilla]
-    public sealed class battleAdvDef : StageTemplate
+    public sealed class FinalStageNewDef : StageTemplate
     {
-        public override IdContainer GetId() => nameof(BattleAdvTest);
-
-
+        public override IdContainer GetId() => nameof(FinalStage);
         public override StageConfig MakeConfig()
         {
             var config = StageConfig.FromId(GetId());
-            config.Obj0 = NewBackgrounds.ghibli;
-            config.Obj1 = NewBackgrounds.ghibli;
-            config.Obj2 = NewBackgrounds.ghibli;
-            config.Obj3 = NewBackgrounds.ghibli;
-            config.Obj4 = NewBackgrounds.ghibli;
             return config;
+        }
+
+    }
+    [EntityLogic(typeof(FinalStageNewDef))]
+    public sealed class FinalStage : Stage
+    {
+        public FinalStage()
+        {
+            Level = 4;
+            BossPool = new RepeatableRandomPool<string> { { "Seija", 1f } };
+            SentinelExhibitType = typeof(KongZhanpinhe);
+        }
+        public override GameMap CreateMap()
+        {
+            return GameMap.CreateSingleRoute(Boss.Id, new StationType[]
+            {
+                StationType.Shop,
+                StationType.Gap,
+                StationType.EliteEnemy,
+                StationType.Boss
+            });
         }
     }
 
-    public sealed class NewStageExDef : StageTemplate
+    /*public sealed class NewStageExDef : StageTemplate
     {
         public override IdContainer GetId() => nameof(NewStageEx);
 

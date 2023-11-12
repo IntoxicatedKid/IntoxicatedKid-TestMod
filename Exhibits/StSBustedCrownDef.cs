@@ -35,6 +35,8 @@ using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using LBoL.Core.Stations;
+using LBoL.EntityLib.Exhibits.Common;
+using LBoL.EntityLib.Exhibits.Shining;
 
 namespace test.Exhibits
 {
@@ -90,7 +92,7 @@ namespace test.Exhibits
         }
         [EntityLogic(typeof(StSBustedCrownDef))]
         [UsedImplicitly]
-        [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 0)]
+        [ExhibitInfo(WeighterType = typeof(StSBustedCrownWeighter))]
         public sealed class StSBustedCrown : ShiningExhibit
         {
             protected override void OnAdded(PlayerUnit player)
@@ -100,6 +102,17 @@ namespace test.Exhibits
             protected override void OnRemoved(PlayerUnit player)
             {
                 GameRun.AdditionalRewardCardCount += Value1;
+            }
+            private class StSBustedCrownWeighter : IExhibitWeighter
+            {
+                public float WeightFor(Type type, GameRunController gameRun)
+                {
+                    if (gameRun.CurrentStage.Level > 2 || gameRun.Player.HasExhibit<StSBustedCrownDef.StSBustedCrown>() || gameRun.Player.HasExhibit<StSCursedKeyDef.StSCursedKey>() || gameRun.Player.HasExhibit<StSEctoplasmDef.StSEctoplasm>() || gameRun.Player.HasExhibit<StSPhilosophersStoneDef.StSPhilosophersStone>() || gameRun.Player.HasExhibit<StSRunicDomeDef.StSRunicDome>() || gameRun.Player.HasExhibit<StSVelvetChokerDef.StSVelvetChoker>())
+                    {
+                        return 0f;
+                    }
+                    return 1f;
+                }
             }
         }
     }

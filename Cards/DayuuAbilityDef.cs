@@ -105,8 +105,8 @@ namespace test.Cards
 
                RelativeEffects: new List<string>() { "DayuuFriendSe" },
                UpgradedRelativeEffects: new List<string>() { "DayuuFriendSe" },
-               RelativeCards: new List<string>() { "DayuuFriend", "DayuuExodia" },
-               UpgradedRelativeCards: new List<string>() { "DayuuFriend", "DayuuExodia" },
+               RelativeCards: new List<string>() { "DayuuExodia" },
+               UpgradedRelativeCards: new List<string>() { "DayuuExodia" },
                Owner: null,
                Unfinished: false,
                Illustrator: "Roke",

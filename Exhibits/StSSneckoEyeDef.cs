@@ -117,8 +117,8 @@ namespace test.Exhibits
                     { 1, 1f },
                     { 2, 1f },
                     { 3, 1f },
-                    { 4, 1f },
-                    { 5, 1f }
+                    { 4, 0.9f },
+                    { 5, GameRun.CurrentStage.Level <= 1 ? 0f : 0.9f }
                 }.SampleMany(GameRun.BattleRng, 6, true);
                 for (int j = 0; j < 6; j++)
                 {

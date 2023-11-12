@@ -35,6 +35,7 @@ using UnityEngine.InputSystem.Controls;
 using LBoL.EntityLib.Exhibits;
 using JetBrains.Annotations;
 using Yarn;
+using static test.Exhibits.StSBustedCrownDef;
 
 namespace test.Exhibits
 {
@@ -90,7 +91,7 @@ namespace test.Exhibits
         }
         [EntityLogic(typeof(StSVelvetChokerDef))]
         [UsedImplicitly]
-        [ExhibitInfo(ExpireStageLevel = 3, ExpireStationLevel = 0)]
+        [ExhibitInfo(WeighterType = typeof(StSVelvetChokerWeighter))]
         public sealed class StSVelvetChoker : ShiningExhibit
         {
             protected override void OnEnterBattle()
@@ -116,6 +117,17 @@ namespace test.Exhibits
             protected override void OnLeaveBattle()
             {
                 Counter = 0;
+            }
+            private class StSVelvetChokerWeighter : IExhibitWeighter
+            {
+                public float WeightFor(Type type, GameRunController gameRun)
+                {
+                    if (gameRun.CurrentStage.Level > 2 || gameRun.Player.HasExhibit<StSBustedCrown>() || gameRun.Player.HasExhibit<StSCursedKeyDef.StSCursedKey>() || gameRun.Player.HasExhibit<StSEctoplasmDef.StSEctoplasm>() || gameRun.Player.HasExhibit<StSPhilosophersStoneDef.StSPhilosophersStone>() || gameRun.Player.HasExhibit<StSRunicDomeDef.StSRunicDome>() || gameRun.Player.HasExhibit<StSVelvetChokerDef.StSVelvetChoker>())
+                    {
+                        return 0f;
+                    }
+                    return 1f;
+                }
             }
         }
     }

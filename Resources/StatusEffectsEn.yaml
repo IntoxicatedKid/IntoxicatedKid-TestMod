@@ -31,8 +31,8 @@ AyaTerukuniShiningThroughHeavenandEarthSe:
     Description: "All cards played twice.\nLose 1 maximum life for each card played."
     Name: Terukuni Shining Through Heaven and Earth
 DayuuAbilitySe:
-    Brief: "At the start of {PlayerName}'s turn, gain random mana for each |Teammate| cards in the hand.\nFor each |Dayuu, Sparrow of Sobs and Skulls| in the hand, gain more random mana instead."
-    Description: "At the start of {OwnerName}'s turn, gain {Count} random mana for each |Teammate| cards in the hand.\nFor each |Dayuu, Sparrow of Sobs and Skulls| in the hand, gain {Level} random mana instead."
+    Brief: "At the start of {PlayerName}'s turn, gain random mana.\nGain more mana for each |Remnant| or |Teammate| card in the hand."
+    Description: "At the start of {OwnerName}'s turn, gain {Count} random mana.\nGain {Level} more mana for each |Remnant| or |Teammate| card in the hand."
     Name: Color the World
 DayuuFriendSe:
     Brief: "If |Passer Secare|, |Late Night Bites|, |Youkai Symposium|, |Color the World|, and summoned |Dayuu, Sparrow of Sobs and Skulls| is in the hand, remove them from combat and add a |Dayuu, the Forbidden One| to the hand.\nIt enters the hand summoned."
@@ -43,8 +43,8 @@ DayuuExodiaSe:
     Description: "{OwnerName} can't lose life."
     Name: Advent
 HexagonSe:
-    Brief: "Accumulate damage every 10 seconds. When {PlayerName} plays a card, deal that much damage and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage."
-    Description: "Accumulate {AccumulateDamage} damage every 10 seconds. When {PlayerName} plays a card, deal {Level} damage to her and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage.\n{OwnerName} loses 30 life for each second."
+    Brief: "{PlayerName} can only have up to 250 points of Barrier and Block.\nAccumulate damage every 10 seconds. When {PlayerName} plays a card, deal that much damage and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage."
+    Description: "{PlayerName} can only have up to 250 points of Barrier and Block.\nAccumulate {AccumulateDamage} damage every 10 seconds. When {PlayerName} plays a card, deal {Level} damage to her and lose all stack.\nAccumulate 5 more damage for every 30 seconds, up to 30 more damage.\nIf the accumulated damage reaches 100, {PlayerName} loses a life for each second, increased by the amount of accumulated damage.\n{OwnerName} loses 30 life for each second."
     Name: Survival
 StSAccuracySe:
     Brief: "Damage of |Throwing Knives| are increased."
@@ -54,6 +54,10 @@ StSAmplifySe:
     Brief: "Ability cards played twice."
     Description: "The next {Level:plural one='ability card' other='% ability cards'} played twice."
     Name: Amplify
+StSBackAttackSe:
+    Brief: "Deals {Value}% more damage."
+    Description: "{OwnerName} deals {Value}% more damage."
+    Name: Back Attack
 StSBurstSe:
     Brief: "Defense or skill cards played twice."
     Description: "The next {Level:plural one='defense or skill card' other='% defense or skill cards'} played twice."
@@ -82,6 +86,10 @@ StSPanicButtonSe:
     Brief: "Can't gain |Block| or |Barrier| from cards."
     Description: "{OwnerName} can't gain |Block| or |Barrier| from cards for {Duration} turn{Duration:plural one='' other='s'}."
     Name: Panic Button
+StSSurroundedSe:
+    Brief: "Takes 50% more damage from behind. Play non-random single target card or |Spell Card| to change direction."
+    Description: "{OwnerName} takes 50% more damage from behind. Use non-random single target card or |Spell Card| to change direction."
+    Name: Surrounded
 StSTerrorSe:
     Brief: "|Vulnerable| can't be removed from {OwnerName}."
     Description: "|Vulnerable| can't be removed from {OwnerName}."
